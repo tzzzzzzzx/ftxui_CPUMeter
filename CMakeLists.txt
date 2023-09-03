@@ -15,7 +15,11 @@ FetchContent_Declare(ftxui
     GIT_TAG v3.0.0
     SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ext/ftxui
 )
-FetchContent_MakeAvailable(ftxui)
+FetchContent_GetProperties(ftxui)
+if(NOT ftxui_POPULATED) 
+    FetchContent_Populate(ftxui)
+    add_subdirectory(${ftxui_SOURCE_DIR} ${ftxui_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
 # add executable
 add_executable(cpuchk ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/CPUMonitor.cpp)
 target_link_libraries(cpuchk
