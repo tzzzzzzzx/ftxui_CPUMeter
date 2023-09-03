@@ -21,7 +21,13 @@ if(NOT ftxui_POPULATED)
     add_subdirectory(${ftxui_SOURCE_DIR} ${ftxui_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif()
 # add executable
-add_executable(cpuchk ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/CPUMonitor.cpp)
+# src list for win32
+if (WIN32)
+    set(SRC_LIST ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/CPUMonitorWindows.cpp)
+else()
+    set(SRC_LIST ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/CPUMonitor.cpp)
+endif()
+add_executable(cpuchk ${SRC_LIST})
 target_link_libraries(cpuchk
     PRIVATE ftxui::screen
     PRIVATE ftxui::dom
