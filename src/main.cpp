@@ -1,13 +1,15 @@
-#include <unistd.h>
-
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
 #include <queue>
 #include <string>
-
+#ifndef _WIN32
 #include "CPUMonitor.hpp"
+#include <unistd.h>
+#else
+#include "CPUMonitorWindows.hpp"
+#endif
 #include "ftxui/component/component.hpp"
 #include "ftxui/component/component_base.hpp"
 #include "ftxui/component/component_options.hpp"
